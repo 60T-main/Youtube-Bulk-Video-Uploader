@@ -38,6 +38,9 @@ def uploader(creds, video_folder):
     for video_file in video_files:
         try:
             track_name = os.path.splitext(video_file)[0]
+
+            description = ''' '''
+
             video_path = os.path.join(video_folder, video_file)
             media = MediaFileUpload(video_path, chunksize=-1, resumable=True)
 
@@ -46,7 +49,7 @@ def uploader(creds, video_folder):
                 body={
                     "snippet": {
                         "title": f"{track_name}",
-                        "description": " ",
+                        "description": f"{description}",
                         "categoryId": "10"
                     },
                     "status": {
@@ -59,9 +62,9 @@ def uploader(creds, video_folder):
             print(f"Uploaded: {video_file}, Video ID: {response['id']}")
 
         except Exception as e:
-            print(f"Failed to upload {video_file}: {str(e)}")
+            print(f"Failed to upload {video_file}")
             if 'uploadLimitExceeded' in str(e):
-                print("Upload limit exceeded, wait 24 hours to continue...")
+                print("Upload limit exceeded, wait 24 hours to continue... (this restriction is from YouTube)")
                 break 
             else:
                 print("Retrying in 1 minute...")
