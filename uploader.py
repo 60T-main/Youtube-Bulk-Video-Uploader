@@ -5,6 +5,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 import time
+import re
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 
@@ -31,7 +32,7 @@ def check_creds():
     return creds
 
 #  begin upload process
-def uploader(creds, video_folder):
+def uploader(creds, video_folder, description):
     youtube = build("youtube", "v3", credentials=creds)
     # searches .mp4 files in selected folder
     videos = os.listdir(path=video_folder)
@@ -41,8 +42,6 @@ def uploader(creds, video_folder):
     for video_file in video_files:
         try:
             track_name = os.path.splitext(video_file)[0]
-
-            description = ''' '''
 
             video_path = os.path.join(video_folder, video_file)
             media = MediaFileUpload(video_path, chunksize=-1, resumable=True)
