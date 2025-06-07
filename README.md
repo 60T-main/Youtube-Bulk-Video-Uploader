@@ -6,6 +6,23 @@ This project is a YouTube Bulk Uploader that allows users to upload multiple .mp
 
 Make sure you have Python 3.7 or higher installed on your system. If you don’t have it, you can download it from python.org.
 
+## Dependencies
+
+Install required packages with:
+
+pip install -r requirements.txt
+
+markdown
+Copy
+Edit
+
+This installs:
+- `google-auth`
+- `google-auth-oauthlib`
+- `google-api-python-client`
+- `tkinter` (usually built-in)
+- `pytest` (for testing)
+
 In order to use this program, you'll need to set up a project in Google Cloud Console and enable the necessary APIs. **Follow these steps:**
 
 ## 1. Create a Google Cloud Account
@@ -46,5 +63,18 @@ Configure the OAuth consent screen with your app’s information.
 
 **Download the client secret JSON file, rename it to client_secrets.json and drop it in root folder (.\Youtube-Bulk-Uploader).**
 
+
+## Running Program and Tests
+
 to run the program, navigate to ...\Youtube Bulk Uploader directory via console and type _python gui.py_
+
+To run the automated tests, use:
+
+pytest
+
+arduino
+Copy
+Edit
+
+This will test the credential setup and uploader using mock data.
 
