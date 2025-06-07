@@ -27,7 +27,7 @@ In order to use this program, you'll need to set up a project in Google Cloud Co
 
 ## 1. Create a Google Cloud Account
 
-If you don’t already have one, create a Google Cloud account at https://cloud.google.com.
+If you don’t already have one, create a Google Cloud account at [Google Cloud Console](https://console.cloud.google.com/).
 
 ## 2. Create a New Project
 
