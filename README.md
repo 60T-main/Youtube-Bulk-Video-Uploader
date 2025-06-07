@@ -1,3 +1,7 @@
+# Description
+
+This project is a YouTube Bulk Uploader that allows users to upload multiple .mp4 videos from a selected folder using a graphical interface.
+
 # IMPORTANT
 
 Make sure you have Python 3.7 or higher installed on your system. If you don’t have it, you can download it from python.org.
