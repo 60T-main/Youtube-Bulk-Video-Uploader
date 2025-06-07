@@ -70,6 +70,8 @@ Configure the OAuth consent screen with your app’s information.
 
 to run the program, navigate to ...\Youtube Bulk Uploader directory via console and type _python gui.py_
 
+you can also use command line arguments: _python gui.py ".folder/path" "description"_ (Both folder path and descripton must be in quotes)
+
 To run the automated tests, use:
 
 pytest
