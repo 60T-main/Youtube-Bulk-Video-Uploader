@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter.filedialog import askdirectory
 import sys
+import threading
 
 # Console redirect class (to show console on GUI)
 class gui_console():
@@ -22,10 +23,18 @@ def choose_folder():
 def start_upload():
     folder_path = path_var.get()
     description = desc_entry.get("1.0", "end").strip()
-    print(folder_path)
-    if folder_path:  
-        creds = check_creds()  
-        uploader(creds, folder_path, description)  
+    print(f"Selected folder: {folder_path}")
+    print(f"Description: {description}")
+    if folder_path:
+        thread = threading.Thread(target=run_upload, args=(folder_path, description))
+        thread.start()
+
+def run_upload(folder_path, description):
+    try:
+        creds = check_creds()
+        uploader(creds, folder_path, description)
+    except Exception as e:
+        print(f"Error: {e}")
 
 # Window setup
 window = Tk()
@@ -72,7 +81,7 @@ window.grid_columnconfigure(1, weight=1)
 sys.stdout = gui_console(text_widget)
 sys.stderr = gui_console(text_widget)
 
-from uploader import check_creds, uploader
+from project import check_creds, uploader
 
 
 window.mainloop()

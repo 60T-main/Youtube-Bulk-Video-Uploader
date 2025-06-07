@@ -5,7 +5,6 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 import time
-import re
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
 
