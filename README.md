@@ -63,6 +63,8 @@ Configure the OAuth consent screen with your app’s information.
 
 **Download the client secret JSON file, rename it to client_secrets.json and drop it in root folder (.\Youtube-Bulk-Uploader).**
 
+⚠️ **Never share your `client_secrets.json` or `token.json`.**
+
 
 ## Running Program and Tests
 
