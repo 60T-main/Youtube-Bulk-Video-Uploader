@@ -5,8 +5,28 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 import time
+import sys
+
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+
+# program can run via terminal with the main function
+def main():
+    # if terminal arguments are provided
+    import gui 
+    if len(sys.argv) == 3:
+        folder_path = sys.argv[1]
+        print(f"Folder path: '{folder_path}'")
+        desc_entry = sys.argv[2]
+        
+        if not os.path.isdir(folder_path):
+            raise FileNotFoundError(f"Folder does not exist: {folder_path}")
+        
+        creds = check_creds()
+        uploader(creds, folder_path, desc_entry)
+    else:
+        obj = gui.GUI()
+        obj.window.mainloop()
 
 #  check credentials (login info) 
 def check_creds():
@@ -14,6 +34,10 @@ def check_creds():
     # if token exists, pull login info from it
     if os.path.exists("token.json"):
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
+
+    # if client_secrets.json doesnt exist, explain what to do 
+    if not os.path.exists("client_secrets.json"):
+        raise FileNotFoundError("Missing 'client_secrets.json'! Please download it from Google Cloud Console and place it in the project directory. More info: https://github.com/60T-main/Youtube-Bulk-Video-Uploader/blob/main/README.md#1-create-a-google-cloud-account")
 
     # request login if token doesnt exist
     if not creds or not creds.valid:
@@ -33,9 +57,14 @@ def check_creds():
 #  begin upload process
 def uploader(creds, video_folder, description):
     youtube = build("youtube", "v3", credentials=creds)
+
     # searches .mp4 files in selected folder
     videos = os.listdir(path=video_folder)
     video_files = [f for f in videos if f.endswith(".mp4")]
+    
+    # raise error if no .mp4 files found in folder
+    if len(video_files) == 0:
+        raise FileNotFoundError("No .mp4 files found")
 
     # uploading individual tracks in folder
     for video_file in video_files:
@@ -75,7 +104,8 @@ def uploader(creds, video_folder, description):
 
 
 
-
+if __name__ == '__main__':
+    main()
 
 
 
