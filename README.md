@@ -17,6 +17,7 @@ Copy
 Edit
 
 This installs:
+
 - `google-auth`
 - `google-auth-oauthlib`
 - `google-api-python-client`
@@ -53,7 +54,7 @@ Click on Create Credentials and select API Key.
 
 Copy the generated API key—you’ll need it for the project.
 
-## 5. Set Up OAuth 2.0 
+## 5. Set Up OAuth 2.0
 
 Go to Credentials.
 
@@ -65,7 +66,6 @@ Configure the OAuth consent screen with your app’s information.
 
 ⚠️ **Never share your `client_secrets.json` or `token.json`.**
 
-
 ## Running Program and Tests
 
 to run the program, navigate to ...\Youtube Bulk Uploader directory via console and type _python gui.py_
@@ -74,11 +74,6 @@ you can also use command line arguments: _python gui.py ".folder/path" "descript
 
 To run the automated tests, use:
 
-pytest
-
-arduino
-Copy
-Edit
+_pytest test_project.py_
 
 This will test the credential setup and uploader using mock data.
-

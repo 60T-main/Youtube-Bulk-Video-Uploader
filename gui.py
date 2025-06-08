@@ -36,13 +36,13 @@ class GUI():
         # read only text entry for showing folder path 
         self.path_var = StringVar()
         path_entry = ttk.Entry(self.window, textvariable=self.path_var, width=50, state='readonly')
-        path_entry.grid(row=1, column=0, padx=(20, 10), pady=10)
+        path_entry.grid(row=1, column=0, padx=(20, 10), pady=10,columnspan=2)
 
         # description entry
         label_desc = ttk.Label(self.window, text="Type video desctiption")
         label_desc.grid(row=2, column=0, columnspan=2, pady=(20, 10), padx=20)
         self.desc_entry = Text(self.window, height=10, width=60,)
-        self.desc_entry.grid(row=3, column=0, padx=(20, 10), pady=10)
+        self.desc_entry.grid(row=3, column=0, columnspan=2, pady=(10,20), sticky="nsew")
 
         # browse button
         choose_btn = ttk.Button(self.window, text="Browse", command=self.choose_folder)  
@@ -53,8 +53,9 @@ class GUI():
 
         # creates GUI console
         self.text_widget = Text(self.window, height=10, width=60)
-        self.text_widget.grid(row=5, column=0, columnspan=2, padx=20, pady=(10, 20), sticky="nsew")
+        self.text_widget.grid(row=5, column=0, columnspan=2, padx=(10,20), pady=(10, 20), sticky="nsew")
 
+        # makes it so that content resizes with the window
         self.window.grid_rowconfigure(3, weight=1)
         self.window.grid_columnconfigure(0, weight=1)
         self.window.grid_columnconfigure(1, weight=1)
@@ -92,8 +93,6 @@ class GUI():
             print(f"Error: {e}")
 
 
-
-from project import check_creds, uploader
 
 if __name__ == "__main__":
     obj = GUI()
