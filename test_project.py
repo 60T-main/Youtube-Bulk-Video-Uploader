@@ -1,13 +1,27 @@
-from project import check_creds, uploader
-from unittest.mock import Mock, patch
+from project import check_creds, uploader, check_folder
+from unittest.mock import Mock, patch, MagicMock
 import pytest
 import os
 
-def test_check_creds(): 
-    creds = check_creds()
-    assert creds != None
-    assert creds.valid or creds.expired
 
+
+@patch("project.os.path.exists")
+@patch("project.Credentials.from_authorized_user_file")
+def test_check_creds(fake_creds,fake_path_check): 
+
+    def fake_path(path):
+        if path == "token.json" or path == "client_secrets.json":
+            return True
+        return False
+    fake_path_check.side_effect = fake_path
+
+    fake_creds1 = MagicMock()
+    fake_creds1.valid = True
+    fake_creds.return_value = fake_creds1
+
+    creds = check_creds()
+
+    assert creds.valid
 
 @patch("project.build")  # replace googles api build function with a a mock
 
@@ -38,3 +52,18 @@ def test_uploader(fake_build, tmp_path):
     # Asserts 
     fake_videos.insert.assert_called() # .assert_called is part of unittest.mock.Mock
     fake_execute.assert_called()
+
+def test_check_folder(tmp_path):
+    mp4_file = tmp_path / "video.mp4"
+    mp4_file.write_text("fake text")
+
+    assert check_folder(str(tmp_path)) == True
+
+    mp4_file.unlink()
+    txt_file = tmp_path / "file.txt"
+    txt_file.write_text("fake text")
+
+    assert check_folder(str(tmp_path)) == False
+
+    no_folder = tmp_path / "no folder"
+    assert check_folder(str(no_folder)) == False

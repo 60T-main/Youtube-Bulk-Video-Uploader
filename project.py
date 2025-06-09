@@ -58,13 +58,13 @@ def check_creds():
 def uploader(creds, video_folder, description):
     youtube = build("youtube", "v3", credentials=creds)
 
+    if not check_folder(video_folder):
+        print("Folder doesn't exist OR no .mp4 files found")
+
     # searches .mp4 files in selected folder
     videos = os.listdir(path=video_folder)
     video_files = [f for f in videos if f.endswith(".mp4")]
     
-    # raise error if no .mp4 files found in folder
-    if len(video_files) == 0:
-        raise FileNotFoundError("No .mp4 files found")
 
     # uploading individual tracks in folder
     for video_file in video_files:
@@ -102,6 +102,8 @@ def uploader(creds, video_folder, description):
                 print("Retrying in 1 minute...")
                 time.sleep(60)
 
+def check_folder(path): #checks if folder exists and has .mp4 files
+    return os.path.isdir(path) and any(f.endswith(".mp4") for f in os.listdir(path))
 
 
 if __name__ == '__main__':
