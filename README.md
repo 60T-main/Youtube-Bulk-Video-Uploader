@@ -74,7 +74,7 @@ _python gui.py_
 
 To use the program via command-line arguments (without the GUI), navigate to the same directory and type:
 
-_python project.py "folder_path" "description" "playlist_title"" playlist_description"_
+_python project.py "folder_path" "description" "playlist_title" "playlist_description"_
 
 Important Notes for Command Line:
 
