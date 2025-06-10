@@ -76,7 +76,7 @@ To use the program via command-line arguments (without the GUI), navigate to the
 
 _python project.py "folder_path" "description" "playlist_title" "playlist_description"_
 
-Important Notes for Command Line:
+**Important Notes for Command Line:**
 
 "folder_path" and "description" are required and must be enclosed in quotes.
 "playlist_title" and "playlist_description" are optional. If provided, they should also be in quotes.
