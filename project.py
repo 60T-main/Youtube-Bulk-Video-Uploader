@@ -142,7 +142,7 @@ def uploader(creds, video_folder : str, description : str, playlist_title = None
 
         # exceptions
         except Exception as e:
-            print(f"Failed to upload {video_file} due to error: {e}")
+            print(f"Failed to upload {video_file}")
             if 'uploadLimitExceeded' in str(e):
                 print("Upload limit exceeded, wait 24 hours to continue... (this restriction is from YouTube)")
                 break 

@@ -150,6 +150,7 @@ class GUI():
     def start_upload(self):
         folder_path = self.path_var.get()
         description = self.desc_entry.get("1.0", "end").strip()
+        playlist_description = None
 
         # gather playlist enties
         if self.selected_option.get() and self.selected_option.get() != "Select Playlist or Album":
